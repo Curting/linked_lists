@@ -60,6 +60,20 @@ class LinkedList
     current
   end
 
+  def pop
+    current = @head
+    until current.next_node.next_node.nil?
+      current = current.next_node
+    end
+    # Assign the current tail to a variable to return it when popping
+    current_tail = tail.clone
+
+    # Assign second-to-last node as new tail
+    current.next_node = nil
+    
+    current_tail
+  end
+
 end
 
 class Node
@@ -90,3 +104,5 @@ puts linked_list.head # => #<Node:0x007.......>
 puts linked_list.head.value # => A
 puts linked_list.tail.value # => D
 puts linked_list.at(2).value # => C
+
+puts linked_list.pop
