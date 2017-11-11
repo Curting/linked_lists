@@ -2,7 +2,7 @@
 class LinkedList
 
   def initialize(node = nil)
-    @head = node
+    @head = Node.new(nil)
   end
 
   def append(value)
@@ -27,6 +27,15 @@ class LinkedList
     end
   end
 
+  def size
+    size = 0
+    current = @head
+    until current.next_node.nil?
+      current = current.next_node
+      size += 1
+    end
+    size
+  end
 
 end
 
@@ -38,3 +47,18 @@ class Node
     @next_node = next_node
   end
 end
+
+linked_list = LinkedList.new
+puts linked_list.size
+
+linked_list.append("B")
+puts linked_list.size
+
+linked_list.append("C")
+puts linked_list.size
+
+linked_list.append("D")
+puts linked_list.size
+
+linked_list.prepend("A")
+puts linked_list.size
