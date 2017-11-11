@@ -1,32 +1,32 @@
 
 class LinkedList
-  attr_reader :head, :tail
 
-  def initialize
-    @head = nil
-    @tail = nil
+  def initialize(node = nil)
+    @head = node
   end
 
-  def append(node)
-    if @head == nil
-      @head = node
-      @tail = node
+  def append(value)
+    if @head.nil?
+      @head = Node.new(value)
     else
-      @tail.next_node = node
-      @tail = node
+      # Iterate from the @head to the last node with 'current' variable
+      current = @head
+      until current.next_node.nil?
+        current = current.next_node
+      end
+      current.next_node = Node.new(value)
     end
   end
 
-  def prepend(node)
-    if @head == nil
-      @head = node
-      @tail = node
+  def prepend(value)
+    if @head.nil?
+      @head = Node.new(value)
     else
-      previous_head = @head
-      @head = node
-      @head.next_node = previous_head
+      current = @head
+      @head = Node.new(value, current)
     end
   end
+
 
 end
 
