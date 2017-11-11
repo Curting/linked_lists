@@ -77,10 +77,20 @@ class LinkedList
 
   def contains?(value)
     condition = false
-    size.times do |idx|
-      condition = true if at(idx).value == value
+    current = @head
+    # Does @head contain the value?
+    condition = true if current.value == value
+
+    # If not, iterate through the list until found
+    until condition == true || current.next_node.nil?
+      current = current.next_node
+      condition = true if current.value == value
     end
     condition
+  end
+
+  def find(value)
+    
   end
 
 end
@@ -118,7 +128,7 @@ puts linked_list.at(2).value # => C
 puts linked_list.pop # => #<Node:0x007........>
 
 puts linked_list.contains?("D") # => false
-puts linked_list.contains?("C") # => true
+puts linked_list.contains?("A") # => true
 
 
 
