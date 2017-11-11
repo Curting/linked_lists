@@ -62,6 +62,7 @@ class LinkedList
 
   def pop
     current = @head
+    # Assign current to second to last node
     until current.next_node.next_node.nil?
       current = current.next_node
     end
@@ -70,8 +71,16 @@ class LinkedList
 
     # Assign second-to-last node as new tail
     current.next_node = nil
-    
+
     current_tail
+  end
+
+  def contains?(value)
+    condition = false
+    size.times do |idx|
+      condition = true if at(idx).value == value
+    end
+    condition
   end
 
 end
@@ -100,9 +109,17 @@ puts linked_list.size # => 3
 linked_list.prepend("A")
 puts linked_list.size # => 4
 
-puts linked_list.head # => #<Node:0x007.......>
 puts linked_list.head.value # => A
+
 puts linked_list.tail.value # => D
+
 puts linked_list.at(2).value # => C
 
-puts linked_list.pop
+puts linked_list.pop # => #<Node:0x007........>
+
+puts linked_list.contains?("D") # => false
+puts linked_list.contains?("C") # => true
+
+
+
+
