@@ -39,6 +39,14 @@ class LinkedList
     size
   end
 
+  def tail
+    current = @head
+    until current.next_node.nil?
+      current = current.next_node
+    end
+    current
+  end
+
 end
 
 class Node
@@ -67,3 +75,4 @@ puts linked_list.size # => 4
 
 puts linked_list.head # => #<Node:0x007.......>
 puts linked_list.head.value # => A
+puts linked_list.tail.value # => D
