@@ -4,11 +4,11 @@ class LinkedList
   attr_reader :head
 
   def initialize(node = nil)
-    @head = Node.new(nil)
+    @head = Node.new
   end
 
   def append(value)
-    if @head.nil?
+    if @head.value.nil?
       @head = Node.new(value)
     else
       # Iterate from the @head to the last node with 'current' variable
@@ -30,11 +30,16 @@ class LinkedList
   end
 
   def size
-    size = 0
-    current = @head
-    until current.next_node.nil?
-      current = current.next_node
-      size += 1
+    # If the list is empty return 0
+    if @head.value.nil?
+      size = 0
+    else
+      size = 1
+      current = @head
+      until current.next_node.nil?
+        current = current.next_node
+        size += 1
+      end
     end
     size
   end
@@ -42,6 +47,14 @@ class LinkedList
   def tail
     current = @head
     until current.next_node.nil?
+      current = current.next_node
+    end
+    current
+  end
+
+  def at(index)
+    current = @head
+    index.times do 
       current = current.next_node
     end
     current
@@ -76,3 +89,4 @@ puts linked_list.size # => 4
 puts linked_list.head # => #<Node:0x007.......>
 puts linked_list.head.value # => A
 puts linked_list.tail.value # => D
+puts linked_list.at(2).value # => C
