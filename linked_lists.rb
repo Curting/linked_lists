@@ -1,6 +1,8 @@
 
 class LinkedList
 
+  attr_reader :head
+
   def initialize(node = nil)
     @head = Node.new(nil)
   end
@@ -49,16 +51,19 @@ class Node
 end
 
 linked_list = LinkedList.new
-puts linked_list.size
+puts linked_list.size # => 0
 
 linked_list.append("B")
-puts linked_list.size
+puts linked_list.size # => 1
 
 linked_list.append("C")
-puts linked_list.size
+puts linked_list.size # => 2
 
 linked_list.append("D")
-puts linked_list.size
+puts linked_list.size # => 3
 
 linked_list.prepend("A")
-puts linked_list.size
+puts linked_list.size # => 4
+
+puts linked_list.head # => #<Node:0x007.......>
+puts linked_list.head.value # => A
