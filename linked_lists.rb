@@ -3,7 +3,7 @@ class LinkedList
 
   attr_reader :head
 
-  def initialize(node = nil)
+  def initialize
     @head = Node.new
   end
 
@@ -76,21 +76,49 @@ class LinkedList
   end
 
   def contains?(value)
-    condition = false
+    found = false
     current = @head
     # Does @head contain the value?
-    condition = true if current.value == value
+    found = true if current.value == value
 
     # If not, iterate through the list until found
-    until condition == true || current.next_node.nil?
+    until found == true || current.next_node.nil?
       current = current.next_node
-      condition = true if current.value == value
+      found = true if current.value == value
     end
-    condition
+    found
   end
 
   def find(value)
-    
+    current = @head
+    idx = 0
+    found = false
+
+    # Does @head contain the value?
+    found = true if current.value == value
+
+    # If not, iterate through the list until found
+    until found || current.next_node.nil?
+      current = current.next_node
+      idx += 1
+      found = true if current.value == value
+    end
+
+    found ? idx : nil
+  end
+
+  def to_s
+    # Output the list in the format: "( data ) -> ( data ) -> ( data ) -> nil"
+    string = ""
+
+    current = @head
+
+    until current.nil?
+      string << "( #{current.value} ) -> "
+      current = current.next_node
+    end
+
+    string << "nil"
   end
 
 end
@@ -129,6 +157,12 @@ puts linked_list.pop # => #<Node:0x007........>
 
 puts linked_list.contains?("D") # => false
 puts linked_list.contains?("A") # => true
+
+puts linked_list.find("C") # => 2
+puts linked_list.find("A") # => 0
+puts linked_list.find("D").inspect # => nil
+
+puts linked_list.to_s # => ( A ) -> ( B ) -> ( C ) -> nil
 
 
 
