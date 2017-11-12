@@ -4,11 +4,11 @@ class LinkedList
   attr_reader :head
 
   def initialize
-    @head = Node.new
+    @head = nil
   end
 
   def append(value)
-    if @head.value.nil?
+    if @head.nil?
       @head = Node.new(value)
     else
       # Iterate from the @head to the last node with 'current' variable
@@ -31,7 +31,7 @@ class LinkedList
 
   def size
     # If the list is empty return 0
-    if @head.value.nil?
+    if @head.nil?
       size = 0
     else
       size = 1
@@ -126,6 +126,37 @@ class LinkedList
     string << "nil"
   end
 
+  def insert_at(value, index)
+    current = @head
+    prev_node = nil
+    new_node = nil
+
+    # If the index is 0 it should prepend the value.
+    if index == 0
+      self.prepend(value)
+    else
+      # If the list size is shorter (-1), equal (0) or longer (1) than index.
+      # Remember self.size indexing starts from 1.
+      case self.size <=> index
+      when -1
+        puts "ERROR: Too high index. The list is not that long."
+      when 0
+        # Index is the node after tail, so we can just append
+        self.append(value)
+      when 1
+        index.times do
+          prev_node = current
+          current = current.next_node
+        end
+
+        # Let the new node point to the next node it's index-replacing
+        new_node = Node.new(value, current)
+        # Let the replaced node point to the new node
+        prev_node.next_node = new_node
+      end
+    end
+  end
+
 end
 
 class Node
@@ -169,11 +200,11 @@ puts linked_list.find("D").inspect # => nil
 
 puts linked_list.to_s # => ( A ) -> ( B ) -> ( C ) -> nil
 
+puts linked_list.insert_at("Q", 2) # => <Node:0x007...>
+puts linked_list.to_s # => ( A ) -> ( B ) -> ( Q ) -> ( C ) -> nil
+
+# Does the #insert_at method work on an empty list? Yes.
 new_list = LinkedList.new
-new_list.append("A")
-puts new_list.size
-puts new_list.pop
-puts new_list.size
-
-
+puts new_list.insert_at("Q", 0)
+puts new_list.to_s #=> ( Q ) -> nil
 
