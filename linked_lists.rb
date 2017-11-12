@@ -61,18 +61,23 @@ class LinkedList
   end
 
   def pop
-    current = @head
-    # Assign current to second to last node
-    until current.next_node.next_node.nil?
-      current = current.next_node
+    # If the list only contains one node... else...
+    if @head.next_node.nil?
+      @head.value = nil
+    else
+      current = @head
+      # Assign current to second to last node
+      until current.next_node.next_node.nil?
+        current = current.next_node
+      end
+      # Assign the current tail to a variable to return it when popping
+      current_tail = tail.clone
+
+      # Assign second-to-last node as new tail
+      current.next_node = nil
+
+      current_tail
     end
-    # Assign the current tail to a variable to return it when popping
-    current_tail = tail.clone
-
-    # Assign second-to-last node as new tail
-    current.next_node = nil
-
-    current_tail
   end
 
   def contains?(value)
@@ -164,6 +169,11 @@ puts linked_list.find("D").inspect # => nil
 
 puts linked_list.to_s # => ( A ) -> ( B ) -> ( C ) -> nil
 
+new_list = LinkedList.new
+new_list.append("A")
+puts new_list.size
+puts new_list.pop
+puts new_list.size
 
 
 
