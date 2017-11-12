@@ -115,7 +115,6 @@ class LinkedList
   def to_s
     # Output the list in the format: "( data ) -> ( data ) -> ( data ) -> nil"
     string = ""
-
     current = @head
 
     until current.nil?
@@ -235,6 +234,7 @@ new_list = LinkedList.new
 puts new_list.insert_at("Q", 0)
 puts new_list.to_s #=> ( Q ) -> nil
 
+# Does the #remove_at method work on an size=1 list? Yes.
 puts new_list.remove_at(0)
 puts new_list.to_s #=> nil
 
