@@ -157,6 +157,30 @@ class LinkedList
     end
   end
 
+  def remove_at(index)
+    if self.size > index && index >= 0 
+      current = @head
+      prev_node = nil
+
+      index.times do
+        prev_node = current
+        current = current.next_node
+      end
+
+      # Check if the list only contains one node:
+      if prev_node.nil?
+        @head = nil
+      else
+        # Example: Current = B: From A -> B -> C to A -> C
+        prev_node.next_node = current.next_node
+      end
+      # Return the removed node
+      current
+    else
+      puts "ERROR: Invalid index."
+    end
+  end
+
 end
 
 class Node
@@ -203,8 +227,14 @@ puts linked_list.to_s # => ( A ) -> ( B ) -> ( C ) -> nil
 puts linked_list.insert_at("Q", 2) # => <Node:0x007...>
 puts linked_list.to_s # => ( A ) -> ( B ) -> ( Q ) -> ( C ) -> nil
 
+puts linked_list.remove_at(1) # => <Node:0x007...>
+puts linked_list.to_s # => ( A ) -> ( Q ) -> ( C ) -> nil
+
 # Does the #insert_at method work on an empty list? Yes.
 new_list = LinkedList.new
 puts new_list.insert_at("Q", 0)
 puts new_list.to_s #=> ( Q ) -> nil
+
+puts new_list.remove_at(0)
+puts new_list.to_s #=> nil
 
